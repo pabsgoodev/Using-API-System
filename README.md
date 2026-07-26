@@ -1,92 +1,98 @@
-## README.md
-
-```md
 # 📰 News API App
 
-Aplicação fullstack para consumo de notícias em tempo real usando API externa.  
-Backend seguro com validação de dados, tratamento padronizado de erros e arquitetura simples para escalar.
+A full-stack application for fetching real-time news from an external API.
+
+The backend is built with a strong focus on security, data validation, standardized error handling, and a modular architecture designed for scalability.
 
 ---
 
-## 🚀 Tecnologias
+# 🚀 Technologies
 
-### Backend
-- Node.js
-- TypeScript
-- Express
-- Axios
+## Backend
 
-### Segurança / Qualidade
-- Zod (validação de dados)
-- Pattern `[data, error]` (controle de erros)
-- Sanitização básica de inputs
-- Estrutura modular
+* Node.js
+* TypeScript
+* Express
+* Axios
 
----
+## Security & Code Quality
 
-## ⚙️ Funcionalidades
-
-- Buscar notícias em tempo real via API externa
-- Filtros por categoria (opcional)
-- Tratamento de erros padronizado
-- Estrutura pronta para autenticação (Bearer Token)
+* Zod (data validation)
+* `[data, error]` Result Pattern
+* Basic input sanitization
+* Modular architecture
 
 ---
 
-## 🔐 Validação com Zod
+# ⚙️ Features
 
-Exemplo:
+* Fetch real-time news from an external API
+* Optional category filtering
+* Standardized error handling
+* Architecture prepared for Bearer Token authentication
+
+---
+
+# 🔐 Data Validation with Zod
+
+Example:
 
 ```ts
-import { z } from 'zod';
+import { z } from "zod";
 
 export const newsSchema = z.object({
-  category: z.string().optional(),
+    category: z.string().optional(),
 });
-````
+```
 
 ---
 
-## 🔁 Pattern [data, error]
+# 🔁 Result Pattern (`[data, error]`)
 
-Evita try/catch espalhado:
+The project uses a functional approach for error handling, avoiding excessive `try/catch` blocks throughout the application.
+
+Example:
 
 ```ts
 export async function getNews() {
-  try {
-    const response = await axios.get('API_URL');
-    return [response.data, null];
-  } catch (error) {
-    return [null, error];
-  }
+    try {
+        const response = await axios.get("API_URL");
+        return [response.data, null];
+    } catch (error) {
+        return [null, error];
+    }
 }
 ```
 
-Uso:
+Usage:
 
 ```ts
 const [data, error] = await getNews();
 
 if (error) {
-  return res.status(500).json({ error: 'Failed to fetch news' });
+    return res.status(500).json({
+        error: "Failed to fetch news",
+    });
 }
 ```
 
 ---
 
-## 🌐 Consumo da API
+# 🌐 API Integration
 
 ```ts
-import axios from 'axios';
+import axios from "axios";
 
 export const api = axios.create({
-  baseURL: 'https://newsapi.org/v2',
+    baseURL: "https://newsapi.org/v2",
 });
 ```
 
 ---
 
-## ▶️ Rodando o projeto
+# ▶️ Getting Started
+
+Start the development server:
 
 ```bash
 npm run dev
@@ -94,56 +100,56 @@ npm run dev
 
 ---
 
-## 🔑 Variáveis de ambiente
+# 🔑 Environment Variables
 
-Crie um `.env`:
+Create a `.env` file:
 
-```
+```env
 PORT=3000
-API_KEY=sua_chave_aqui
+API_KEY=your_api_key
 ```
 
 ---
 
-## 📌 Exemplo de rota
+# 📌 Example Endpoint
 
 ```http
 GET /news?category=technology
 ```
 
-Resposta:
+Response:
 
 ```json
 {
-  "data": [...],
-  "error": null
+    "data": [...],
+    "error": null
 }
 ```
 
 ---
 
-## 🛡️ Segurança aplicada
+# 🛡️ Security
 
-* Validação com Zod
-* Estrutura preparada para autenticação JWT
-* Tratamento de erros centralizado
-* Evita crash da aplicação
+The application includes several security-focused practices:
+
+* Data validation with Zod
+* Architecture prepared for JWT authentication
+* Centralized error handling
+* Prevents unexpected application crashes
+* Basic input sanitization
 
 ---
 
-## 📈 Melhorias futuras
+# 📈 Future Improvements
 
-* Autenticação completa (JWT)
-* Cache com Redis
+* Full JWT authentication
+* Redis caching
 * Rate limiting
-* Frontend com React
-* Deploy (Docker)
+* React frontend
+* Docker deployment
 
 ---
 
-## 👨‍💻 Autor
+# 👨‍💻 Author
 
-Pablo
-
-```
-```
+**Pablo Antônio Mascena Da Silva**
